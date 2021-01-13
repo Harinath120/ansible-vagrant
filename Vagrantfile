@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
         ansible.vm.network "private_network", ip: "192.168.1.2"
         ansible.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        end
 
   end
 
@@ -27,6 +28,7 @@ Vagrant.configure("2") do |config|
        srv02.vm.network "private_network", ip: "192.168.1.4"
        srv02.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+       end
 
    end
 
@@ -36,6 +38,7 @@ Vagrant.configure("2") do |config|
        srv03.vm.network "private_network", ip: "192.168.1.5"
        srv03.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+       end
       
    end
 end
