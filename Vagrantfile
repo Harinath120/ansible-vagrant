@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
 
    end
 
-   config.vm.define "srv02" do |srv02|
+   config.vm.define "srv03" do |srv03|
     srv03.vm.box = "centos/7"
        srv03.vm.hostname = "srv03"
        srv03.vm.network "private_network", ip "192.168.1.5"
