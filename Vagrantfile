@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
       srv01.vm.hostname = "srv01"
       srv01.vm.network "private_network", ip "192.168.1.3"
       srv01.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       vb.memory = "1024"
       vb.cpus = 2
       end
