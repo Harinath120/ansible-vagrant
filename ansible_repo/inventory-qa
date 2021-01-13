@@ -1,6 +1,6 @@
 web01 ansible_host=192.168.1.3 ansible_user=devops ansible_ssh_pass=devops
 web02 ansible_host=192.168.1.4 ansible_user=devops ansible_ssh_pass=devops
-db ansible_host=192.168.1.5 ansible_user=devops ansible_ssh_pass=devops
+db01 ansible_host=192.168.1.5 ansible_user=devops ansible_ssh_pass=devops
 
 [websrvgrp]
 web01
