@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
 
    config.vm.define "srv02" do |srv02|
    srv02.vm.box = "centos/7"
-       srv02.vm.hostname = "srv01"
+       srv02.vm.hostname = "srv02"
        srv02.vm.network "private_network", ip: "192.168.1.4"
        srv02.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
