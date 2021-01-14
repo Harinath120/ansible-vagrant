@@ -1,6 +1,7 @@
 ---
 - name: deploy webapps
   hosts: websrvgrp
+  become: yes
   remote_user: devops
   tasks:
     - name: Install httpd
