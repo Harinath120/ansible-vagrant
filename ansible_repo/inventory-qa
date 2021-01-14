@@ -16,6 +16,6 @@ dbsrvgrp
 [dbsrvgrp:vars]
 ansible_python_interpreter='/usr/bin/python3'
 
-[mydc:vars]
-ansible_user=devops
+#[mydc:vars]
+#ansible_user=devops
 
