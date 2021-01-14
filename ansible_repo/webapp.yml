@@ -1,0 +1,13 @@
+---
+- name: deploy webapps
+  hosts: websrvgrp
+  remote_user: devops
+  tasks:
+    - name: Install httpd
+      state: present
+
+    - name: Start and Enable httpd
+      service:
+        name: httpd
+        state: started 
+        enabled: yes 
