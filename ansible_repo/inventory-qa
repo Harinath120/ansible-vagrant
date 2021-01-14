@@ -1,6 +1,6 @@
-web01 ansible_host=192.168.1.3 ansible_user=devops ansible_ssh_pass=devops
-web02 ansible_host=192.168.1.4 ansible_user=devops ansible_ssh_pass=devops
-db01 ansible_host=192.168.1.5 ansible_user=devops ansible_ssh_pass=devops
+web01 ansible_host=192.168.1.3 
+web02 ansible_host=192.168.1.4 
+db01 ansible_host=192.168.1.5 
 
 [websrvgrp]
 web01
@@ -9,6 +9,13 @@ web02
 [dbsrvgrp]
 db01
 
-[mydc:srvgrp]
+[mydc:children]
 websrvgrp
 dbsrvgrp
+
+[dbsrvgrp:vars]
+ansible_python_interpreter='/usr/bin/python3'
+
+[mydc:vars]
+ansible_user=devops
+ansible_ssh_pass=devops
