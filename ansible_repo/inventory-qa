@@ -13,9 +13,6 @@ db01
 websrvgrp
 dbsrvgrp
 
-[websrvgrp:vars]
-ansible_python_interpreter='/usr/bin/python3'
-
 [dbsrvgrp:vars]
 ansible_python_interpreter='/usr/bin/python3'
 
