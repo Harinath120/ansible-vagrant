@@ -4,7 +4,9 @@
   remote_user: devops
   tasks:
     - name: Install httpd
-      state: present
+      yum:
+        name: httpd
+        state: present
 
     - name: Start and Enable httpd
       service:
