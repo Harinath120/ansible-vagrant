@@ -8,3 +8,4 @@
 
     - debug:
         msg: "ansible_memory_mb variable value  is {{ansible_memory_mb}}"
+
