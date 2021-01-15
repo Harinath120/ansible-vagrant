@@ -1,0 +1,7 @@
+---
+- name: Learning setup Module/ FACT variables
+  hosts: all
+#  become: yes
+  tasks: 
+    - debug:
+        msg: "OS Family for {{ansible_fqdn}} is {{ansible_os_family}}."
