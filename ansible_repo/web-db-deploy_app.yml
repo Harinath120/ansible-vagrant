@@ -3,6 +3,9 @@
   hosts: websrvgrp
   become: yes
   remote_user: devops
+  vars:
+    webpackage: index.html 
+    webdestdir: /var/www/html
   tasks:
     - name: Install httpd
       yum:
@@ -15,15 +18,34 @@
         state: started 
         enabled: yes 
 
+    - name: push website file
+      copy:
+        src: "{{webpackage}}"
+        dest: "{{webdestdir}}"
+        owner: root 
+        group: root 
+        mode: 0644
+
+
 - name: Setup mysql db on db grp
   hosts: dbsrvgrp
   become: yes
   remote_user: devops
+  vars: 
+     dbname: accounts 
+     dbuser: admin 
+     dbpass: admin123 
   tasks: 
     - name: Install mysql/Mariadb service 
       apt:
         name: mysql-server
         state: present 
+
+    - name: Install mysql-python
+      apt:
+        name: python3-mysqldb
+        state: present 
+
 
     - name: Start and Enable Mariadb 
       service:
@@ -31,3 +53,14 @@
          state: started
          enabled: yes
       
+    - name: Create a new database with name 'Accounts'
+      mysql_db:
+        name: "{{dbname}}"
+        state: present
+
+    - name: setup admin user 
+      mysql_user:
+        name: "{{dbuser}}"
+        password: "{{dbpass}}"
+        priv: '*.*:ALL'
+        state: present 
