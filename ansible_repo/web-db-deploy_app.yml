@@ -20,6 +20,7 @@
 
     - name: push website file
       copy:
+        remote_src: yes
         src: "{{webpackage}}"
         dest: "{{webdestdir}}"
         owner: root 
