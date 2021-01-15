@@ -2,6 +2,12 @@
   hosts: all
   become: yes
   tasks:
+    - debug:
+        msg: "Value of USRNM Variable is {{USRNM}}"       
+
+    - debug:
+        msg: "Value of GRPNM Variable is {{GRPNM}}"      
+
     - name: Add user 
       user:
         name: "{{USRNM}}"
