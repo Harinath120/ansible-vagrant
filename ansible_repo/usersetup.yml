@@ -1,0 +1,14 @@
+- name: :Learning Variable precedence
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add user 
+      user:
+        name: "{{USRNM}}"
+        state: present 
+        shell: /bin/bash
+
+    - name: Create group
+      group:
+        name: "{{GRPNM}}"
+        state: present
