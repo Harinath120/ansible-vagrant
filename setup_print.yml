@@ -3,5 +3,8 @@
   hosts: all
 #  become: yes
   tasks: 
+#    - debug:
+#        msg: "OS Family for {{ansible_fqdn}} is {{ansible_os_family}}."
+
     - debug:
-        msg: "OS Family for {{ansible_fqdn}} is {{ansible_os_family}}."
+        msg: "ansible_memory_mb variable value  is {{ansible_memory_mb}}"
