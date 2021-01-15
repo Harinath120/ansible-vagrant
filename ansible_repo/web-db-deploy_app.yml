@@ -1,0 +1,33 @@
+---
+- name: deploy webapps
+  hosts: websrvgrp
+  become: yes
+  remote_user: devops
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and Enable httpd
+      service:
+        name: httpd
+        state: started 
+        enabled: yes 
+
+- name: Setup mysql db on db grp
+  hosts: dbsrvgrp
+  become: yes
+  remote_user: devops
+  tasks: 
+    - name: Install mysql/Mariadb service 
+      apt:
+        name: mysql-server
+        state: present 
+
+    - name: Start and Enable Mariadb 
+      service:
+         name: mysql 
+         state: started
+         enabled: yes
+      
