@@ -1,2 +1,90 @@
 USRNM: commonuser
 GRPNM: commongroup
+
+
+    - name: Install key for the Jenkins apt repository
+      apt_key:
+        url: "https://pkg.jenkins.io/debian/jenkins.io.key"
+        state: present
+
+
+    - name: Ensure the repository is configured
+      apt_repository:
+        repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+        state: present
+
+
+    - name: Install Jenkins package
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Start & Enable Jenkins
+      service:
+        name: jenkins
+        state: started
+
+
+    - name: Get Jenkins password
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      changed_when: false
+      register: result
+
+    - name: Password to "Unlock Jenkins"
+      debug:
+        var: result.stdout
+
+-- INSERT --                                                                                                                       56,1          Bot
+
+pyOpenSSL 
+ndg-httpsclient
+urllib3
+pyasn1
+
+---
+- hosts: apt-servers
+  remote_user: root
+  tasks:
+    - name: debian | ensure the apt repository key is present
+      apt_key:
+        id="EA8CACC073C3DB2A"
+        keyserver=keyserver.ubuntu.com
+        state=present
+      become: yes
+
+    - name: debian | ensure the apt repository is present
+      apt_repository:
+        repo="deb http://ppa.launchpad.net/linuxuprising/java/ubuntu bionic main"
+        update_cache=yes
+        state=present
+      become: yes
+
+    - name: debian | set license as accepted
+      debconf:
+        name="oracle-java11-installer"
+        question="shared/accepted-oracle-license-v1-2"
+        value='true'
+        vtype='select'
+      become: yes
+
+    - name: debian | ensure Java is installed
+      apt:
+        name="oracle-java11-installer"
+        state=latest
+        cache_valid_time=3600
+        update_cache=yes
+      become: yes
+
+    - name: debian | set Java version as default
+      apt:
+        name="oracle-java11-set-default"
+        state=latest
+      become: yes
+
+- hosts: apt-servers
+  remote_user: root
+  roles:
+    - common
+#    - dev-sec.os-hardening
+    - role: geerlingguy.jenkins
+      become: yes
